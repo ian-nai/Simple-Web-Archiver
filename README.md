@@ -2,7 +2,7 @@
 A simple, GUI web archiving tool in Python.
 
 
-<div align="center">![Screenshot of the tool's GUI.](https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_screenshot.png)</div>
+![Screenshot of the tool's GUI.](https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_screenshot.png)
 
 ## Getting Started
 
