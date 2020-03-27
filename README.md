@@ -1,8 +1,11 @@
 # Simple-Web-Archiver
-A simple, GUI web archiving tool in Python.
+A simple, GUI web archiving tool in Python. Pages can be downloaded as files (HTML, CSS, etc) or as WARCs.
 <p align="center">
   <img src="https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_screenshot.png" alt="Screenshot of the tool's GUI."/>
 </p>
+
+## Why Use This?
+This tool is intended to serve as a simple self-archiving program that is accessible to users with limited technical knowledge. Using the program allows users to quickly and easily download local archives of websites without learning curve of prior technical knowlege related to web archiving. 
 
 ## Getting Started
 
