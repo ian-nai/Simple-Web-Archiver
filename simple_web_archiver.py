@@ -36,7 +36,7 @@ entry1.config(fg = 'black')
 
 canvas1.create_window(200, 140, window=entry1)
 
-def getSquareRoot():  
+def getURLs():  
 
     # The commented definition of 'Segments' below can be used to return base urls split by slashes, rather than by using the regex expression in the uncommented code
     url2 = entry1.get()
@@ -420,7 +420,7 @@ c4.pack()
 
     
     
-button1 = tk.Button(text='Download Archive', command=getSquareRoot)
+button1 = tk.Button(text='Download Archive', command=getURLs)
 canvas1.create_window(200, 180, window=button1)
 
 root.mainloop()
