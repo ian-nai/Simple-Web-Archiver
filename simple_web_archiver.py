@@ -38,7 +38,7 @@ canvas1.create_window(200, 140, window=entry1)
 
 def getSquareRoot():  
 
-    
+    # The commented definition of 'Segments' below can be used to return base urls split by slashes, rather than by using the regex expression in the uncommented code
     url2 = entry1.get()
     
     html_page = requests.get(url2).text
@@ -48,7 +48,8 @@ def getSquareRoot():
     urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', url2)
     print("Urls: ",urls)
     
-    Segments = url2.rpartition('/')
+    #Segments = url2.rpartition('/')
+    Segments = re.findall('^(?:\w+://)?.*?(?::\d+)?(?=/|$)', url2)
     
     base_url = Segments[0]
     
