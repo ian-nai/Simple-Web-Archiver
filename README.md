@@ -1,7 +1,7 @@
 # Simple-Web-Archiver
 A simple, GUI web archiving tool in Python. Pages can be downloaded as files (HTML, CSS, etc) or as WARCs.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_image.png" alt="Screenshot of the tool's GUI."/>
+  <img src="https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/guiscreenshot.png" alt="Screenshot of the tool's GUI."/>
 </p>
 
 ## Why Use This?
@@ -24,3 +24,5 @@ pip3 install simple_web_archiver.py
 ## Usage
 
 The GUI allows you to select whether you'd like to save the website's files locally, as WARCs, or both, and whether you'd like to download files solely from the website whose address you've entered or from external sites, as well (i.e., sites linked to from the address you've entered). Only enter the base URL for the site you'd like to capture (e.g., https://www.duckduckgo.com), and the tool will retrieve all of the pages and files of the site it can find, following links to download as much of the site as possible. 
+
+To download files from a limited scope of the website, use the second text entry box to enter your specified base URL (e.g., https://www.duckduckgo.com/test/). This will only download links beginning with that prefix, or external links found on pages with that base URL.
