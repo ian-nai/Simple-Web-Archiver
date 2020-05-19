@@ -14,6 +14,8 @@ root.title('Simple Web Archiver')
 canvas1 = tk.Canvas(root, width = 400, height = 300)
 canvas1.pack()
 
+filename_errors = 0
+
 def on_entry_click(event):
     if entry1.get() == 'Enter your URL...':
        entry1.delete(0, "end")
@@ -35,7 +37,7 @@ canvas1.create_window(200, 180, window=label_entry2)
 
 entry1 = tk.Entry (root) 
 
-entry1.insert(0, 'www.example.com')
+entry1.insert(0, 'https://www.example.com')
 entry1.bind('<FocusIn>', on_entry_click)
 entry1.bind('<FocusOut>', on_focusout)
 entry1.config(fg = 'black')
@@ -44,7 +46,7 @@ canvas1.create_window(200, 140, window=entry1)
 
 entry2 = tk.Entry (root) 
 
-entry2.insert(0, 'www.example.com/test/')
+entry2.insert(0, 'https://example.com/test/')
 entry2.bind('<FocusIn>', on_entry_click)
 entry2.bind('<FocusOut>', on_focusout)
 entry2.config(fg = 'black')
@@ -127,9 +129,13 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                    open(d, 'wb').write(r.content)
+                    if len(d) > 255:
+                        d[:255]
+                    open(d, 'wb').write(r.content) 
                 else:
-                    open(e, 'wb').write(r.content)
+                    if len(d) > 250:
+                        d[:250]
+                    open(e, 'wb').write(r.content) 
                     
         # WARC only for local files
         elif (var3.get() == 0) & (var4.get() == 1):
@@ -150,8 +156,13 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                    open(d, 'wb').write(r.content)
+                    if len(d) > 255:
+                        d[:255]
+                    open(d, 'wb').write(r.content)      
                 else:
+                    if len(d) > 240:
+                        d[:240]
+                    open(d, 'wb').write(r.content)  
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                     
         # HTML and WARC for local files
@@ -174,9 +185,13 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                    open(d, 'wb').write(r.content)
+                     if len(d) > 255:
+                        d[:255]
+                     open(d, 'wb').write(r.content)      
                 else:
-                    open(e, 'wb').write(r.content)
+                    if len(d) > 240:
+                        d[:240]
+                    open(d, 'wb').write(r.content)  
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                     
     # html, external only                
@@ -200,9 +215,13 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                    open(d, 'wb').write(r.content)
+                     if len(d) > 255:
+                        d[:255]
+                     open(d, 'wb').write(r.content) 
                 else:
-                    open(e, 'wb').write(r.content)
+                    if len(d) > 250:
+                        d[:250]
+                    open(e, 'wb').write(r.content) 
                 
         # warc, external only
         if (var3.get() == 0) & (var4.get() == 1):
@@ -224,8 +243,13 @@ def getLimitedScope():
                       '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                       '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                       '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                      open(d, 'wb').write(r.content)
+                      if len(d) > 255:
+                          d[:255]
+                      open(d, 'wb').write(r.content)      
                   else:
+                      if len(d) > 240:
+                          d[:240]
+                      open(d, 'wb').write(r.content)  
                       subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):                    
@@ -247,8 +271,12 @@ def getLimitedScope():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                         open(d, 'wb').write(r.content)
+                         if len(d) > 255:
+                             d[:255]
+                         open(d, 'wb').write(r.content) 
                      else:
+                         if len(d) > 240:
+                             d[:240]
                          open(e, 'wb').write(r.content)
                          subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
                   
@@ -274,8 +302,12 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
-                    open(d, 'wb').write(r.content)
+                    if len(d) > 255:
+                             d[:255]
+                    open(d, 'wb').write(r.content) 
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
         
             for x in external_links2:
@@ -296,8 +328,12 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
                 
         # warc only for local and external
@@ -319,8 +355,12 @@ def getLimitedScope():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 240:
+                             d[:240]
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                 
                     
@@ -342,8 +382,12 @@ def getLimitedScope():
                       '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                       '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                       '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                      if len(d) > 255:
+                             d[:255]
                       open(d, 'wb').write(r.content)
                   else:
+                      if len(d) > 240:
+                             d[:240]
                       subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):
@@ -365,8 +409,12 @@ def getLimitedScope():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                         if len(d) > 255:
+                             d[:255]
                          open(d, 'wb').write(r.content)
                      else:
+                        if len(d) > 240:
+                             d[:240]
                         open(e, 'wb').write(r.content)
                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                 
@@ -389,8 +437,12 @@ def getLimitedScope():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                         if len(d) > 255:
+                             d[:255]
                          open(d, 'wb').write(r.content)
                      else:
+                         if len(d) > 240:
+                             d[:240]
                          open(e, 'wb').write(r.content)
                          subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
                          
@@ -493,8 +545,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
                     
         # WARC only for local files
@@ -516,8 +572,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 240:
+                             d[:240]
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                     
         # HTML and WARC for local files
@@ -540,8 +600,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 240:
+                             d[:240]
                     open(e, 'wb').write(r.content)
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                     
@@ -566,8 +630,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
                 
         # warc, external only
@@ -590,8 +658,12 @@ def getFullSite():
                       '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                       '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                       '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                      if len(d) > 255:
+                             d[:255]
                       open(d, 'wb').write(r.content)
                   else:
+                      if len(d) > 240:
+                             d[:240]
                       subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):                    
@@ -613,8 +685,12 @@ def getFullSite():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                         if len(d) > 255:
+                             d[:255]
                          open(d, 'wb').write(r.content)
                      else:
+                         if len(d) > 240:
+                             d[:240]
                          open(e, 'wb').write(r.content)
                          subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
                   
@@ -640,8 +716,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
         
             for x in external_links:
@@ -662,8 +742,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 250:
+                             d[:250]
                     open(e, 'wb').write(r.content)
                 
         # warc only for local and external
@@ -685,8 +769,12 @@ def getFullSite():
                     '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                     '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                     '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                    if len(d) > 255:
+                             d[:255]
                     open(d, 'wb').write(r.content)
                 else:
+                    if len(d) > 240:
+                             d[:240]
                     subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                 
                     
@@ -708,8 +796,12 @@ def getFullSite():
                       '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                       '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                       '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                      if len(d) > 255:
+                             d[:255]
                       open(d, 'wb').write(r.content)
                   else:
+                      if len(d) > 240:
+                             d[:240]
                       subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):
@@ -731,8 +823,12 @@ def getFullSite():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                         if len(d) > 255:
+                             d[:255]
                          open(d, 'wb').write(r.content)
                      else:
+                        if len(d) > 240:
+                             d[:240]
                         open(e, 'wb').write(r.content)
                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
                 
@@ -755,8 +851,12 @@ def getFullSite():
                          '.xls', '.xls', '.xlsm', '.xlsx', '.bak', '.cfg', '.dmp', '.drv', '.ini', '.tmp', '.3g2', '3gp', '.avi',
                          '.flv', '.h264', '.m4v', '.mkv', '.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv', '.doc', '.docx',
                          '.odt', '.pdf', '.rtf', '.tex', '.txt', '.wpd')):
+                         if len(d) > 255:
+                             d[:255]
                          open(d, 'wb').write(r.content)
                      else:
+                         if len(d) > 240:
+                             d[:240]
                          open(e, 'wb').write(r.content)
                          subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
                          
