@@ -6,6 +6,7 @@ import os
 import pathlib
 import json
 import subprocess
+import shutil
 
 root = tk.Tk()
 
@@ -61,17 +62,15 @@ def getLimitedScope():
     html_page2 = requests.get(url3).text
     soup2 = BeautifulSoup(html_page2, 'html.parser')
     links2 = []
-
+    img_links = []
+    
     
     for link in BeautifulSoup(html_page2, parse_only=SoupStrainer('a'), features="html.parser"):
        if link.has_attr('href'):
            links2.append(link['href'])
        
  
-    img_tags = soup2.find_all('img')
-    img_urls = ([img['src'] for img in img_tags])
-    for x in img_urls:
-        links2.append(x)
+  
     
     for link in soup2.find_all('link', href=True):
          links2.append(link['href'])
@@ -103,12 +102,51 @@ def getLimitedScope():
     
     print(linkslist33)
     
+    
     limited_urls = [s for s in linkslist33 if url3 in s]
+    
+    if (var5.get() == 1):
+        img_tags = (soup2.findAll('img'))
+        for im in img_tags:
+            img_links.append(im['src'])
+        for x in limited_urls:
+            html_page3 = requests.get(x).text
+            soup3 = BeautifulSoup(html_page3, 'html.parser')
+            img_tags2 = (soup3.findAll('img'))
+            for im in img_tags2:
+                img_links.append(im['src'])
+    
+        
     print('URLs: ', limited_urls)
    
      # ~~~ button stuff ~~~
     
-    # save html of local pages
+    # save images
+    if (var5.get() == 1):
+        for x in img_links:
+            sep = '?AWSAccessKeyId'
+            img_filename = x.split(sep, 1)[0]
+
+            if img_filename.startswith('http'):
+                img_a = img_filename.replace('http', '')
+            if img_filename.startswith('https'):
+                img_a = img_filename.replace('https', '')
+                img_c = img_a.strip(':')
+                img_d = img_c.replace('/','_')
+            if '.jpg' in img_d:
+                img_e = img_d.split("?",1)[0] 
+
+
+            r = requests.get(x, stream = True)
+            
+            if r.status_code == 200:
+                r.raw.decode_content = True
+    
+    
+            with open(img_d,'wb') as f:
+                shutil.copyfileobj(r.raw, f)
+                
+    # save html of local pages        
     if (var1.get() == 1) & (var2.get() == 0):
         if (var3.get() == 1) & (var4.get() == 0) or (var3.get() == 0) & (var4.get() == 0):
             for x in limited_urls:
@@ -469,6 +507,7 @@ def getFullSite():
     html_page = requests.get(url2).text
     soup = BeautifulSoup(html_page, 'html.parser')
     links = []
+    img_links = []
     
     urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', url2)
     print("Urls: ", urls)
@@ -487,10 +526,6 @@ def getFullSite():
            links_list.append(link['href'])
        
  
-    img_tags = soup.find_all('img')
-    img_urls = ([img['src'] for img in img_tags])
-    for x in img_urls:
-        links_list.append(x)
     
     for link in soup.find_all('link', href=True):
          links_list.append(link['href'])
@@ -520,9 +555,44 @@ def getFullSite():
         url4 = (base_url + str(x))
         linkslist3.append(url4)
     
-    print(linkslist3)
+    if (var5.get() == 1):
+        img_tags = (soup.findAll('img'))
+        for im in img_tags:
+            img_links.append(im['src'])
+        for x in linkslist3:
+            html_page3 = requests.get(x).text
+            soup3 = BeautifulSoup(html_page3, 'html.parser')
+            img_tags2 = (soup3.findAll('img'))
+            for im in img_tags2:
+                img_links.append(im['src'])
+   
+     # ~~~ button stuff ~~~
+     
+    # save images
+    if (var5.get() == 1):
+        for x in img_links:
+            sep = '?AWSAccessKeyId'
+            img_filename = x.split(sep, 1)[0]
+
+            if img_filename.startswith('http'):
+                img_a = img_filename.replace('http', '')
+            if img_filename.startswith('https'):
+                img_a = img_filename.replace('https', '')
+                img_c = img_a.strip(':')
+                img_d = img_c.replace('/','_')
+            if '.jpg' in img_d:
+                img_e = img_d.split("?",1)[0] 
+
+
+            r = requests.get(x, stream = True)
+            
+            if r.status_code == 200:
+                r.raw.decode_content = True
     
-    # ~~~ button stuff ~~~
+    
+            with open(img_d,'wb') as f:
+                shutil.copyfileobj(r.raw, f)
+ 
     
     # save html of local pages
     if (var1.get() == 1) & (var2.get() == 0):
@@ -893,6 +963,9 @@ c3.pack()
 c4 = tk.Checkbutton(root, text='Save WARCs',variable=var4, onvalue=1, offvalue=0)
 c4.pack()
 
+var5 = tk.IntVar()
+c5 = tk.Checkbutton(root, text='Save Images',variable=var5, onvalue=1, offvalue=0)
+c5.pack()
     
     
 button1 = tk.Button(text='Download Archive', command=getFullSite)
