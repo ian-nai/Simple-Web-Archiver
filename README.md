@@ -1,7 +1,7 @@
 # Simple-Web-Archiver
 A simple, GUI web archiving tool in Python. Pages can be downloaded as files (HTML, CSS, etc) or as WARCs. Images from the pages can also be downloaded.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_example.png" alt="Screenshot of the tool's GUI."/>
+  <img src="https://raw.githubusercontent.com/ian-nai/Simple-Web-Archiver/master/gui_example.png?token=AFOEH7TUZUUTVDJTTMBFKNK623AE2" alt="Screenshot of the tool's GUI."/>
 </p>
 
 ## Why Use This?
