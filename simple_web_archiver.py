@@ -31,10 +31,13 @@ links_list = []
 
 
 label_entry1 = tk.Label(root, text= 'Save Entire Website:')
-canvas1.create_window(200, 115, window=label_entry1)
+canvas1.create_window(200, 50, window=label_entry1)
 
 label_entry2 = tk.Label(root, text= 'Save Limited Scope:')
-canvas1.create_window(200, 180, window=label_entry2)
+canvas1.create_window(200, 120, window=label_entry2)
+
+label_entry3 = tk.Label(root, text= 'Delimiting Term:')
+canvas1.create_window(200, 180, window=label_entry3)
 
 entry1 = tk.Entry (root) 
 
@@ -43,38 +46,49 @@ entry1.bind('<FocusIn>', on_entry_click)
 entry1.bind('<FocusOut>', on_focusout)
 entry1.config(fg = 'black')
 
-canvas1.create_window(200, 140, window=entry1)
+canvas1.create_window(200, 75, window=entry1)
 
 entry2 = tk.Entry (root) 
 
-entry2.insert(0, 'https://example.com/test/')
+entry2.insert(0, 'https://www.example.com/test/')
 entry2.bind('<FocusIn>', on_entry_click)
 entry2.bind('<FocusOut>', on_focusout)
 entry2.config(fg = 'black')
 
-canvas1.create_window(200, 205, window=entry2)
+canvas1.create_window(200, 145, window=entry2)
+
+entry3 = tk.Entry (root) 
+
+entry3.insert(0, '/test/')
+entry3.bind('<FocusIn>', on_entry_click)
+entry3.bind('<FocusOut>', on_focusout)
+entry3.config(fg = 'black')
+
+canvas1.create_window(200, 205, window=entry3)
 
 
 def getLimitedScope():
 
     url3 = entry2.get()
     
+    url_segment = entry3.get()
+    
     html_page2 = requests.get(url3).text
     soup2 = BeautifulSoup(html_page2, 'html.parser')
     links2 = []
     img_links = []
     
+    Segments = re.findall('^(?:\w+://)?.*?(?::\d+)?(?=/|$)', url3)
+    base_url = Segments[0]
+    print(base_url)
     
     for link in BeautifulSoup(html_page2, parse_only=SoupStrainer('a'), features="html.parser"):
        if link.has_attr('href'):
            links2.append(link['href'])
        
- 
-  
-    
     for link in soup2.find_all('link', href=True):
          links2.append(link['href'])
-    
+         
     links3 = []
     for x in links2:
         if "http" in x:
@@ -95,29 +109,30 @@ def getLimitedScope():
     print('external links: ', external_links2)
                
     linkslist33 = []
-    
+  
+        
     for x in links3:
-        url44 = (url3 + str(x))
+        url44 = (base_url + str(x))
         linkslist33.append(url44)
     
-    print(linkslist33)
     
-    
-    limited_urls = [s for s in linkslist33 if url3 in s]
+    limited_urls = [s for s in linkslist33 if url_segment in s]
+    limited_urls.append(url3)
+    print('URLs to save:', limited_urls)
+    return
     
     if (var5.get() == 1):
         img_tags = (soup2.findAll('img'))
         for im in img_tags:
             img_links.append(im['src'])
+                
         for x in limited_urls:
             html_page3 = requests.get(x).text
             soup3 = BeautifulSoup(html_page3, 'html.parser')
             img_tags2 = (soup3.findAll('img'))
-            for im in img_tags2:
-                img_links.append(im['src'])
-    
-        
-    print('URLs: ', limited_urls)
+            for im2 in img_tags2:
+                img_links.append(im2['src'])
+   
    
      # ~~~ button stuff ~~~
     
@@ -555,6 +570,8 @@ def getFullSite():
         url4 = (base_url + str(x))
         linkslist3.append(url4)
     
+    print('URLs to save: ', linkslist3)
+    
     if (var5.get() == 1):
         img_tags = (soup.findAll('img'))
         for im in img_tags:
@@ -969,9 +986,9 @@ c5.pack()
     
     
 button1 = tk.Button(text='Download Archive', command=getFullSite)
-canvas1.create_window(200, 245, window=button1)
+canvas1.create_window(200, 255, window=button1)
 
 button2 = tk.Button(text='Download Limited Archive', command=getLimitedScope)
-canvas1.create_window(200, 270, window=button2)
+canvas1.create_window(200, 280, window=button2)
 
 root.mainloop()
