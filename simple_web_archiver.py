@@ -216,7 +216,7 @@ def getLimitedScope():
                     if len(d) > 240:
                         d[:240]
                     open(d, 'wb').write(r.content)  
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                     
         # HTML and WARC for local files
         else:
@@ -245,7 +245,7 @@ def getLimitedScope():
                     if len(d) > 240:
                         d[:240]
                     open(d, 'wb').write(r.content)  
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                     
     # html, external only                
     elif (var1.get() == 0) & (var2.get() == 1):
@@ -303,7 +303,7 @@ def getLimitedScope():
                       if len(d) > 240:
                           d[:240]
                       open(d, 'wb').write(r.content)  
-                      subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
+                      subprocess.run(['wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):                    
                 for x in external_links2:
@@ -331,7 +331,7 @@ def getLimitedScope():
                          if len(d) > 240:
                              d[:240]
                          open(e, 'wb').write(r.content)
-                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
+                         subprocess.run(['wget', x, ('--warc-file=' + d)])     
                   
     # local and external
     elif (var1.get() == 1) & (var2.get() == 1):
@@ -414,7 +414,7 @@ def getLimitedScope():
                 else:
                     if len(d) > 240:
                              d[:240]
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                 
                     
              for x in external_links2:
@@ -441,7 +441,7 @@ def getLimitedScope():
                   else:
                       if len(d) > 240:
                              d[:240]
-                      subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
+                      subprocess.run(['wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):
                 for x in limited_urls:
@@ -469,7 +469,7 @@ def getLimitedScope():
                         if len(d) > 240:
                              d[:240]
                         open(e, 'wb').write(r.content)
-                        subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                        subprocess.run(['wget', x, ('--warc-file=' + d)])
                 
                     
                 for x in external_links2:
@@ -497,7 +497,7 @@ def getLimitedScope():
                          if len(d) > 240:
                              d[:240]
                          open(e, 'wb').write(r.content)
-                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
+                         subprocess.run(['wget', x, ('--warc-file=' + d)])     
                          
     elif (var1.get() == 0) & (var2.get() == 0):
         print('error! please select an option')
@@ -665,7 +665,7 @@ def getFullSite():
                 else:
                     if len(d) > 240:
                              d[:240]
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                     
         # HTML and WARC for local files
         else:
@@ -694,7 +694,7 @@ def getFullSite():
                     if len(d) > 240:
                              d[:240]
                     open(e, 'wb').write(r.content)
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                     
     # html, external only                
     elif (var1.get() == 0) & (var2.get() == 1):
@@ -751,7 +751,7 @@ def getFullSite():
                   else:
                       if len(d) > 240:
                              d[:240]
-                      subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
+                      subprocess.run(['wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):                    
                 for x in external_links:
@@ -779,7 +779,7 @@ def getFullSite():
                          if len(d) > 240:
                              d[:240]
                          open(e, 'wb').write(r.content)
-                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
+                         subprocess.run(['wget', x, ('--warc-file=' + d)])     
                   
     # local and external
     elif (var1.get() == 1) & (var2.get() == 1):
@@ -862,7 +862,7 @@ def getFullSite():
                 else:
                     if len(d) > 240:
                              d[:240]
-                    subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                    subprocess.run(['wget', x, ('--warc-file=' + d)])
                 
                     
              for x in external_links:
@@ -889,7 +889,7 @@ def getFullSite():
                   else:
                       if len(d) > 240:
                              d[:240]
-                      subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])   
+                      subprocess.run(['wget', x, ('--warc-file=' + d)])   
                       
         if (var3.get() == 1) & (var4.get() == 1):
                 for x in linkslist3:
@@ -917,7 +917,7 @@ def getFullSite():
                         if len(d) > 240:
                              d[:240]
                         open(e, 'wb').write(r.content)
-                        subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])
+                        subprocess.run(['wget', x, ('--warc-file=' + d)])
                 
                     
                 for x in external_links:
@@ -945,7 +945,7 @@ def getFullSite():
                          if len(d) > 240:
                              d[:240]
                          open(e, 'wb').write(r.content)
-                         subprocess.run(['sudo', 'wget', x, ('--warc-file=' + d)])     
+                         subprocess.run(['wget', x, ('--warc-file=' + d)])     
                          
     elif (var1.get() == 0) & (var2.get() == 0):
         print('error! please select an option')
