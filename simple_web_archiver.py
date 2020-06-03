@@ -119,7 +119,7 @@ def getLimitedScope():
     limited_urls = [s for s in linkslist33 if url_segment in s]
     limited_urls.append(url3)
     print('URLs to save:', limited_urls)
-    return
+    
     
     if (var5.get() == 1):
         img_tags = (soup2.findAll('img'))
