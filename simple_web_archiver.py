@@ -108,15 +108,15 @@ def getLimitedScope():
              continue
     print('external links: ', external_links2)
                
-    linkslist33 = []
+    linkslist4 = []
   
         
     for x in links3:
-        url44 = (base_url + str(x))
-        linkslist33.append(url44)
+        url4 = (base_url + str(x))
+        linkslist4.append(url4)
     
     
-    limited_urls = [s for s in linkslist33 if url_segment in s]
+    limited_urls = [s for s in linkslist4 if url_segment in s]
     limited_urls.append(url3)
     print('URLs to save:', limited_urls)
     
