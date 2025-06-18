@@ -18,7 +18,7 @@ pip3 install -r requirements.txt
 Then type the following to open up the GUI:
 
 ```
-pip3 install simple_web_archiver.py
+python3 simple_web_archiver.py
 ```
 
 ## Usage
